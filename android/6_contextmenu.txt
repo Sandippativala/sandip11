@@ -1,0 +1,286 @@
+6.understand menu option.
+a. Create an application that will change color of screen,based on selected options 
+   from the menu.
+b.Create an application as above with context menu.
+
+MainActivity.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Color Changer" />
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="284dp"
+        android:layout_height="58dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Long press on the screen"
+        android:textAlignment="center"
+        android:textColor="#131415"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+MainActivity.java
+
+package com.example.application6;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import org.jetbrains.annotations.NotNull;
+
+
+public class MainActivity extends AppCompatActivity {
+ConstraintLayout mainLayout;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mainLayout=findViewById(R.id.mainlayout);
+        registerForContextMenu(mainLayout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getTitle().toString())
+        {
+            case "Dark(Red)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.red_dark));
+                return true;
+
+            case "Light(Red)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.red_light));
+                return true;
+
+            case "Dark(Green)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.green_dark));
+                return true;
+
+            case "Light(Green)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.green_light));
+                return true;
+
+            case "Dark(Blue)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+                return true;
+
+            case "Light(Blue)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.blue_light));
+                return true;
+
+
+            case "Dark(Yellow)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.yellow_dark));
+                return true;
+
+            case "Light(Yellow)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.yellow_light));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+
+        int id = item.getItemId();
+
+
+        switch (item.getTitle().toString()) {
+            case "Dark(Red)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.red_dark));
+                return true;
+
+            case "Light(Red)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.red_light));
+                return true;
+
+            case "Dark(Green)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.green_dark));
+                return true;
+
+            case "Light(Green)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.green_light));
+                return true;
+
+            case "Dark(Blue)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+                return true;
+
+            case "Light(Blue)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.blue_light));
+                return true;
+
+
+            case "Dark(Yellow)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.yellow_dark));
+                return true;
+
+            case "Light(Yellow)":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.yellow_light));
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+
+
+        }
+    }
+
+}
+
+menu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_red"
+        android:title="Red">
+        <menu>
+            <item
+                android:id="@+id/submenu_red_dark"
+                android:title="Dark(Red)"
+
+                />
+            <item
+                android:id="@+id/submenu_red_light"
+                android:title="Light(Red)" />
+
+        </menu>
+
+    </item>
+
+
+
+    <item
+        android:id="@+id/menu_green"
+        android:title="Green" >
+        <menu>
+            <item
+                android:id="@+id/submenu_green_dark"
+                android:title="Dark(Green)"
+                />
+            <item
+                android:id="@+id/submene_green_light"
+                android:title="Light(Green)"
+                />
+
+
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/menu_blue"
+        android:title="Blue">
+        <menu>
+        <item
+            android:id="@+id/submenu_blue_dark"
+            android:title="Dark(Blue)"
+
+            />
+            <item
+                android:id="@+id/submenu_blue_light"
+                android:title="Light(Blue)"
+
+                />
+
+        </menu>>
+
+    </item>
+
+    <item
+        android:id="@+id/menu_yellow"
+        android:title="Yellow">
+        <menu>
+            <item
+                android:id="@+id/submenu_yellow_dark"
+                android:title="Dark(Yellow)"
+
+                />
+            <item
+                android:id="@+id/submenu_yellow_light"
+                android:title="Light(Yellow)"
+
+                />
+        </menu>
+    </item>
+
+
+</menu>
+
+
+color.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#FFFF00</color>
+
+    <color name="red_dark">#800000</color>
+    <color name="green_dark">#008000</color>
+    <color name="blue_dark">#000080</color>
+    <color name="yellow_dark">#808000</color>
+
+    <color name="red_light">#FFA07A</color>
+    <color name="green_light">#90EE90</color>
+    <color name="blue_light">#87CEEB</color>
+    <color name="yellow_light">#FFFF99</color>
+</resources>

@@ -1,0 +1,281 @@
+//activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="289dp"
+        android:layout_height="124dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <Button
+        android:id="@+id/buttonput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="buttonPut"
+        android:text="Put"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.778" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="268dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="For String ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.222" />
+
+    <EditText
+        android:id="@+id/floatEditText"
+        android:layout_width="268dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="For Float ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335" />
+
+    <EditText
+        android:id="@+id/intEditText"
+        android:layout_width="268dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="For Int ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453" />
+
+    <EditText
+        android:id="@+id/longEditText"
+        android:layout_width="268dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="For Long ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.564" />
+
+    <EditText
+        android:id="@+id/booleanEditText"
+        android:layout_width="268dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="For boolean ..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.685" />
+
+    <Button
+        android:id="@+id/buttonget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="buttonGet"
+        android:text="Get"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="buttonDeleteAll"
+        android:text="SharePreference Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.656"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.778" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+//MainActivity.java
+
+package com.example.application7;
+
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textView;
+    private EditText editText,floatEditText,longEditText,intEditText,booleanEditText;
+    Button clearbutton,putbutton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView=findViewById(R.id.textView);
+        editText=findViewById(R.id.editText);
+        floatEditText=findViewById(R.id.floatEditText);
+        intEditText=findViewById(R.id.intEditText);
+        longEditText=findViewById(R.id.longEditText);
+        booleanEditText=findViewById(R.id.booleanEditText);
+
+
+        clearbutton=findViewById(R.id.buttonClear);
+        clearbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("");
+                textView.setText("");
+                floatEditText.setText("");
+                intEditText.setText("");
+                longEditText.setText("");
+                booleanEditText.setText("");
+
+            }
+        });
+    }
+    public void buttonPut(View view){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.clear();
+        editor.putBoolean("booleanValue", parseBoolean(booleanEditText.getText().toString()));
+        editor.putFloat("floatValue", parseFloat(floatEditText.getText().toString()));
+        editor.putInt("intValue", parseInt(intEditText.getText().toString()));
+        editor.putLong("longValue", parseLong(longEditText.getText().toString()));
+        editor.putString("name", editText.getText().toString());
+
+        editor.apply();
+    }
+    public void buttonGet(View view){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String name = sharedPreferences.getString("name", null);
+        boolean booleanValue=sharedPreferences.getBoolean("booleanValue",false);
+        float floatValue=sharedPreferences.getFloat("floatValue",0f);
+        int intValue=sharedPreferences.getInt("intValue",0);
+        long longValue=sharedPreferences.getLong("longValue",0L);
+
+        if (name == null || name.equals("")) {
+            textView.setText("Shared Preference data does not exist");
+            booleanEditText.setText("");
+            floatEditText.setText("");
+            intEditText.setText("");
+            longEditText.setText("");
+            editText.setText("");
+        }
+        else
+        {
+            String displayText="String:"+name+"\n"+"Float:"+floatValue+"\n"+"Int:"+intValue+"\n"+"Long:"+longValue+"\n"+"Boolean:"+booleanValue;
+            textView.setText(displayText);
+
+            booleanEditText.setText(String.valueOf(booleanValue));
+            floatEditText.setText(String.valueOf(floatValue));
+            intEditText.setText(String.valueOf(intValue));
+            longEditText.setText(String.valueOf(longValue));
+            editText.setText(name != null ? name : "");
+        }
+
+
+
+
+    }
+    public void buttonDeleteAll(View view){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        //removes all the shared preference variables
+        sharedPreferences.edit().clear().commit();
+    }
+    public void buttonDelete(View view){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        // removes specific shared preference variable
+        sharedPreferences.edit().remove("name").commit();
+    }
+
+}
+
+
+//androidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Application7"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

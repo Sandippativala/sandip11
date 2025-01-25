@@ -1,0 +1,204 @@
+4.create an application that will pass some number of items next screen
+and on the next screen that number of items should be display in the list
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="50dp"
+        android:layout_margin="40dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="20dp"
+
+            />
+
+        <EditText
+            android:id="@+id/input_number_edit_text"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:inputType="number"
+            android:hint="Enter a number (1-10)"
+            />
+        <Button
+            android:id="@+id/go_to_second_activity_button"
+            android:layout_width="194dp"
+            android:layout_height="60dp"
+            android:text="Go to Second Activity" />
+
+    </LinearLayout>
+</RelativeLayout>
+
+MainActivity.java
+package com.example.assignment4;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ViewSwitcher;
+
+import java.util.ArrayList;
+
+public class DisplayImageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private static final String[] animalNames = {"Deer", "Dog", "Cat", "Camel", "Giraffe", "Zebra", "Panda", "Wolf", "Cheetah", "Rabbit"};
+    private ImageSwitcher imageSwitcher;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_display_image);
+
+        int itemCount = getIntent().getIntExtra("itemCount", 0);
+
+        ListView listView = findViewById(R.id.listView);
+        ArrayList<String> items = new ArrayList<>();
+
+        if (itemCount > 0 && itemCount <= animalNames.length) {
+            for (int i = 0; i < itemCount; i++) {
+                items.add(animalNames[i]);
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
+        // Initialize imageSwitcher
+        imageSwitcher = findViewById(R.id.imageSwitcher);
+        // Set up the ImageSwitcher to handle image switching
+        imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView = new ImageView(getApplicationContext());
+                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                imageView.setLayoutParams(new ImageSwitcher.LayoutParams(
+                        ImageSwitcher.LayoutParams.MATCH_PARENT,
+                        ImageSwitcher.LayoutParams.MATCH_PARENT));
+                return imageView;
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Ensure position is within bounds
+        if (position >= 0 && position < animalNames.length) {
+            switch (position) {
+                case 0:
+                    imageSwitcher.setImageResource(R.drawable.deer);
+                    break;
+                case 1:
+                    imageSwitcher.setImageResource(R.drawable.dog);
+                    break;
+                case 2:
+                    imageSwitcher.setImageResource(R.drawable.cat);
+                    break;
+                case 3:
+                    imageSwitcher.setImageResource(R.drawable.camal);
+                    break;
+                case 4:
+                    imageSwitcher.setImageResource(R.drawable.giraffe);
+                    break;
+                case 5:
+                    imageSwitcher.setImageResource(R.drawable.zebra);
+                    break;
+                case 6:
+                    imageSwitcher.setImageResource(R.drawable.panda);
+                    break;
+                case 7:
+                    imageSwitcher.setImageResource(R.drawable.wolf);
+                    break;
+                case 8:
+                    imageSwitcher.setImageResource(R.drawable.cheetah);
+                    break;
+                case 9:
+                    imageSwitcher.setImageResource(R.drawable.rabbit);
+                    break;
+            }
+        }
+    }
+}
+
+second_activity.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ImageSwitcher
+        android:id="@+id/imageSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+</LinearLayout>
+
+
+second_activity.java
+
+package com.example.assignment4;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+class MainActivity extends AppCompatActivity {
+    private EditText inputNumberEditText;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        inputNumberEditText = findViewById(R.id.input_number_edit_text);
+        Button goToSecondActivityButton = findViewById(R.id.go_to_second_activity_button);
+
+        goToSecondActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputNumberStr = inputNumberEditText.getText().toString();
+                if (!inputNumberStr.isEmpty()) {
+                    int itemCount = Integer.parseInt(inputNumberStr);
+                    if (itemCount >= 1 && itemCount <= 10) {
+                        Intent intent = new Intent(MainActivity.this, DisplayImageActivity.class);
+                        intent.putExtra("itemCount", itemCount);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "enter a number between 1 to 10", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Please enter a number", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
